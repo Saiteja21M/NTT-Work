@@ -38,10 +38,9 @@ public class Modify implements HttpRequestHandler {
 
 	public HistoryDAO historyDAO = new HistoryDAO();
 
-	public Search searchObj = new Search();
-
 	@SuppressWarnings({ "unchecked" })
-	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NumberFormatException, DBFWException {
+	public void handle(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, NumberFormatException, DBFWException {
 
 		String action = request.getParameter("action");
 
@@ -76,7 +75,8 @@ public class Modify implements HttpRequestHandler {
 
 	@SuppressWarnings("unchecked")
 	void updateNotifAction(String user, int nv_ws_order_id, Connection con, List<Notification> notif,
-			HttpServletRequest request, HttpServletResponse response, boolean showPage, HttpSession session) throws NumberFormatException, DBFWException {
+			HttpServletRequest request, HttpServletResponse response, boolean showPage, HttpSession session)
+			throws NumberFormatException, DBFWException {
 
 		if (showPage) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/updateNotifAction.jsp");
