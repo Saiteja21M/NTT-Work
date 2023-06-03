@@ -1,0 +1,27 @@
+input[type=submit] {
+	font-family: cursive;
+	box-shadow: 4px 4px 4px;
+}
+
+table {
+	border: 1px solid black;
+	border-collapse: separate;
+	border-spacing: 0px;
+	min-width: auto;
+}
+
+.table-responsive {
+	border: 1px solid black;
+}
+
+th {
+	position: sticky;
+	top: 0px;
+	background-color: teal;
+	color: wheat;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 10px;
+}

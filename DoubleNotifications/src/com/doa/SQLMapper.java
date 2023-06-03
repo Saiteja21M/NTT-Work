@@ -8,7 +8,7 @@ import com.domain.Notification;
 
 public class SQLMapper {
 
-	public final static String GETNOTIFICATIONSBYORDER = "Select nv_ws_order_id, to_char(ts_modification,'DD.MM.YY'),notification_type,"
+	public final static String GETNOTIFICATIONSBYORDER = "Select nv_ws_order_id, ts_modification ,notification_type,"
 			+ "notif_action,notif_item_number from toin01 where nv_ws_order_id = ? order by ts_modification, notif_item_number";
 	
 	public final static String DELETENOTIFICATIONBYNOTIF = "delete from toin01 where nv_ws_order_id = ? and notif_item_number = ?";

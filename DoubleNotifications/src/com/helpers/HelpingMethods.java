@@ -11,6 +11,7 @@ import com.dbcon.ConnectionHolder;
 import com.dbcon.DBConnectionException;
 import com.doa.NotificationDAO;
 import com.domain.Notification;
+import com.driver.MainDriver;
 
 public class HelpingMethods {
 
@@ -34,6 +35,11 @@ public class HelpingMethods {
 	public void showNotificationByOrder(boolean isAfterTransaction, int nv_ws_order_id) throws DBConnectionException {
 
 		List<Notification> notificationList = nd.getNotificationsByOrder(con, nv_ws_order_id);
+		
+		if(notificationList.isEmpty()) {
+			System.out.println("no orders were found with given nv_ws_order_id");
+			MainDriver.main(new String[] {""});
+		}
 
 		for (Notification notifs : notificationList) {
 			System.out.println(notifs.getNv_ws_order_id() + "\t" + notifs.getTs_modification() + "\t"
@@ -102,10 +108,10 @@ public class HelpingMethods {
 		List<Notification> duplicates = new ArrayList<>();
 
 		for (Notification notif : notificationList) {
-			String temp = notif.getTs_modification();
+			String temp = notif.getTs_modification().substring(0, 10);
 			int count = 0;
 			for (Notification notif2 : notificationList) {
-				if (temp.equals(notif2.getTs_modification())
+				if (temp.equals(notif2.getTs_modification().substring(0, 10))
 						&& notif.getNotification_type().equals(notif2.getNotification_type())
 						&& notif.getNotif_action().equals(notif2.getNotif_action())) {
 					count++;

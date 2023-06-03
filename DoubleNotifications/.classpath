@@ -13,7 +13,6 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/log4j-1.2.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/mysql-connector-java-8.0.27.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/ojdbc6.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/ojdbc14.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/257016/OneDrive - NTT Data Group/Documents/Saiteja_Koppala_257016_PS/WebContent/WEB-INF/lib/standard-1.1.2.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
