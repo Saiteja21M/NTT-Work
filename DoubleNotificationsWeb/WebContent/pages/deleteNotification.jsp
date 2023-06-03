@@ -98,7 +98,6 @@
 					<td><%=cx.getBrand()%></td>
 					<td><%=cx.getMf_model_code()%></td>
 					<td><%=cx.getWs_model_code()%></td>
-					<td><%=cx.getTs_modification()%></td>
 					<td><%=cx.getOrder_type()%></td>
 					<td><%=cx.getIvs_order_status()%></td>
 					<td><%=cx.getProcessing_type()%></td>

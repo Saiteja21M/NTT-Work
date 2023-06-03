@@ -127,8 +127,8 @@
 					</c:if></td>
 			</tr>
 			<tr>
-				<td colspan="4" align="center"><label for="dog-names">Choose
-						Notification Action:</label> <select name="dog-names" id="dog-names">
+				<td colspan="4" align="center"><label for="column-names">Choose
+						Notification Action:</label> <select name="cloumn-names" id="cloumn-names">
 						<option value=""></option>
 						<option value="ts_modification">Ts_modification</option>
 						<option value="notification_type">Notification Type</option>
@@ -148,7 +148,7 @@
 			<tr>
 				<td>Enter new value</td>
 				<td colspan="4" align="center"><input type="text"
-					name="notif_action" required></td>
+					name="newValue" required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="submit"

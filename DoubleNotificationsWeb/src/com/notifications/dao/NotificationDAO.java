@@ -86,8 +86,8 @@ public class NotificationDAO {
 		return corrected;
 	}
 
-	public int updateNotifActionByNotif(int nv_ws_order_id, int notif_item_number, String notif_action,
-			Connection con) {
+	public int updateNotifActionByNotif(int nv_ws_order_id, int notif_item_number, String newValue, String column_name,
+			Connection con) throws DBFWException{
 
 		int corrected = 0;
 
@@ -96,12 +96,23 @@ public class NotificationDAO {
 
 				@Override
 				public void mapParams(PreparedStatement preStmt) throws SQLException {
-					preStmt.setString(1, notif_action);
+					preStmt.setString(1, newValue);
 					preStmt.setInt(2, nv_ws_order_id);
 					preStmt.setInt(3, notif_item_number);
 				}
 			};
-			corrected = DBHelper.executeUpdate(con, SqlMapper.UPDATE_NOTIF_ACTION_BY_NOTIF, UPDATENOTIFACTION);
+			if (column_name.contains("ts")) {
+				corrected = DBHelper.executeUpdate(con, SqlMapper.UPDATE_NOTIFICATION_BY_NOTIF
+						.replace("column", column_name).replace("value", "to_timestamp(?,'YYYY-MM-DD HH:MI:SSXFF')"),
+						UPDATENOTIFACTION);
+			} else if (column_name.contains("doc")) {
+				corrected = DBHelper.executeUpdate(con, SqlMapper.UPDATE_NOTIFICATION_BY_NOTIF
+						.replace("column", column_name).replace("value", "to_date(?,'YYYY-MM-DD')"), UPDATENOTIFACTION);
+			} else {
+				corrected = DBHelper.executeUpdate(con,
+						SqlMapper.UPDATE_NOTIFICATION_BY_NOTIF.replace("column", column_name).replace("value", "?"),
+						UPDATENOTIFACTION);
+			}
 
 		} catch (DBFWException e) {
 			log.error(e);

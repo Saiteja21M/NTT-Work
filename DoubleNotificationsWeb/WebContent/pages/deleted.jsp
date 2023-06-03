@@ -118,7 +118,7 @@
 		</table>
 	</div>
 
-	<h2 align="center">Order results afer deletion</h2>
+	<h2 align="center">Order results after deletion</h2>
 	<div class="table-responsive2">
 		<table id="myTable" class="display table">
 			<thead>

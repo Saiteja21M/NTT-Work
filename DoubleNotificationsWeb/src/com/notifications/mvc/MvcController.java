@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.notifications.dbfw.DBFWException;
+
 @SuppressWarnings("serial")
 public class MvcController extends javax.servlet.http.HttpServlet implements javax.servlet.Servlet {
 	@SuppressWarnings("rawtypes")
@@ -32,7 +34,11 @@ public class MvcController extends javax.servlet.http.HttpServlet implements jav
 		String key = file.substring(0, file.lastIndexOf('.'));
 		HttpRequestHandler handler = (HttpRequestHandler) handlers.get(key);
 		if (handler != null) {
-			handler.handle(request, response);
+			try {
+				handler.handle(request, response);
+			} catch (NumberFormatException | DBFWException e) {
+				e.printStackTrace();
+			}
 		} else {
 			throw new ServletException("No matching handler");
 		}

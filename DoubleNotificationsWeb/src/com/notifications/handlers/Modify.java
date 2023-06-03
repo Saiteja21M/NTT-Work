@@ -19,6 +19,7 @@ import com.notifications.dao.DAOAppException;
 import com.notifications.dao.HistoryDAO;
 import com.notifications.dao.NotificationDAO;
 import com.notifications.dao.OrderingDAO;
+import com.notifications.dbfw.DBFWException;
 import com.notifications.domain.HistoryTable;
 import com.notifications.domain.Notification;
 import com.notifications.domain.OrderingTable;
@@ -40,7 +41,7 @@ public class Modify implements HttpRequestHandler {
 	public Search searchObj = new Search();
 
 	@SuppressWarnings({ "unchecked" })
-	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NumberFormatException, DBFWException {
 
 		String action = request.getParameter("action");
 
@@ -75,7 +76,7 @@ public class Modify implements HttpRequestHandler {
 
 	@SuppressWarnings("unchecked")
 	void updateNotifAction(String user, int nv_ws_order_id, Connection con, List<Notification> notif,
-			HttpServletRequest request, HttpServletResponse response, boolean showPage, HttpSession session) {
+			HttpServletRequest request, HttpServletResponse response, boolean showPage, HttpSession session) throws NumberFormatException, DBFWException {
 
 		if (showPage) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/updateNotifAction.jsp");
@@ -90,18 +91,19 @@ public class Modify implements HttpRequestHandler {
 			int updated = 0;
 
 			String notif_number = request.getParameter("notif_item_number");
-			String notif_action = request.getParameter("notif_action");
+			String newValue = request.getParameter("newValue");
+			String column_name = request.getParameter("cloumn-names");
 
-			if (!(notif_number.contains(",") && notif_action.contains(","))) {
+			if (!(notif_number.contains(",") && newValue.contains(","))) {
 				updated += notificationDAO.updateNotifActionByNotif(nv_ws_order_id, Integer.parseInt(notif_number),
-						notif_action, con);
+						newValue, column_name, con);
 			} else {
 				String[] notif_numbers = notif_number.split(",");
-				String[] notif_actions = notif_action.split(",");
+				String[] notif_actions = newValue.split(",");
 
 				for (int i = 0; i < notif_numbers.length; i++) {
 					updated += notificationDAO.updateNotifActionByNotif(nv_ws_order_id,
-							Integer.parseInt(notif_numbers[i]), notif_actions[i], con);
+							Integer.parseInt(notif_numbers[i]), notif_actions[i], column_name, con);
 				}
 			}
 			if (updated != 0) {

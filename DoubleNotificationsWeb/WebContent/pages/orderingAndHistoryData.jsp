@@ -51,10 +51,10 @@
 		<table id="myTable" class="display table">
 			<thead>
 				<tr>
-					<th>Order Id</th>
+					<th>Order_Id</th>
 					<th>Ts_modification(24h)</th>
-					<th>Notification Type</th>
-					<th>Notif Action</th>
+					<th>Notification_Type</th>
+					<th>Notif_Action</th>
 					<th>Notif_item_number</th>
 					<th>notif_docdate</th>
 					<th>vehicle_id_7</th>
@@ -101,7 +101,6 @@
 					<td><%=cx.getBrand()%></td>
 					<td><%=cx.getMf_model_code()%></td>
 					<td><%=cx.getWs_model_code()%></td>
-					<td><%=cx.getTs_modification()%></td>
 					<td><%=cx.getOrder_type()%></td>
 					<td><%=cx.getIvs_order_status()%></td>
 					<td><%=cx.getProcessing_type()%></td>
@@ -129,10 +128,10 @@
 		<table id="myTable" class="display table">
 			<thead>
 				<tr>
-					<th>Order Id</th>
+					<th>Order_Id</th>
 					<th>Vehicle_state</th>
-					<th>Product Type</th>
-					<th>Brand Action</th>
+					<th>Product_Type</th>
+					<th>Brand</th>
 					<th>mf_model_code</th>
 					<th>ws_model_code</th>
 					<th>client</th>
@@ -164,7 +163,7 @@
 		<table id="myTable" class="display table">
 			<thead>
 				<tr>
-					<th>Order Id</th>
+					<th>Order_Id</th>
 					<th>Ts_modification(24h)</th>
 					<th>order_type</th>
 					<th>ivs_order_status</th>

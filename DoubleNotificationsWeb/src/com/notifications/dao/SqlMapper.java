@@ -20,7 +20,7 @@ public class SqlMapper {
 	public final static String UPDATE_NOTIFICAIONS_BY_NOTIF = "update toin01 set notif_item_number = notif_item_number operator ? where "
 			+ "nv_ws_order_id = ? and notif_item_number > ?";
 
-	public final static String UPDATE_NOTIF_ACTION_BY_NOTIF = "update toin01 set notif_action = ? where nv_ws_order_id = ? and "
+	public final static String UPDATE_NOTIFICATION_BY_NOTIF = "update toin01 set column = value where nv_ws_order_id = ? and "
 			+ "notif_item_number = ?";
 
 	public final static String GET_ORDERING_TABLE_DATA = "select nv_ws_order_id,mf_order_no, vehicle_id_7, VEHICLE_STATE,CLIENT,PRODUCT_TYPE,BRAND,"
