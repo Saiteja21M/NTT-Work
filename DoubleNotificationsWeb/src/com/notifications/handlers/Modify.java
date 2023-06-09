@@ -146,7 +146,10 @@ public class Modify implements HttpRequestHandler {
 			}
 		}
 		if (duplicates.size() == 2) {
-			if (checkIfCancellationIsThereInMiddle(duplicates, notificationList)) {
+			if (checkIfNotificationIsThereInMiddle(duplicates, notificationList, "E")) {
+				duplicates.clear();
+			}
+			if (checkIfNotificationIsThereInMiddle(duplicates, notificationList, "C")) {
 				duplicates.clear();
 			}
 		}
@@ -172,17 +175,18 @@ public class Modify implements HttpRequestHandler {
 	}
 
 	/**
+	 * @param notif_action
 	 * @return true if 'C' entry is there between two 'E' entries otherwise false
 	 */
-	private boolean checkIfCancellationIsThereInMiddle(List<Notification> duplicates,
-			List<Notification> notificationList) {
+	private boolean checkIfNotificationIsThereInMiddle(List<Notification> duplicates,
+			List<Notification> notificationList, String notif_action) {
 
 		boolean isCancelltionThere = false;
 
 		if (duplicates.size() > 0) {
 			for (Notification check : notificationList) {
 				if (check.getNotif_item_number() == duplicates.get(0).getNotif_item_number() + 1) {
-					if (check.getNotif_action().equals("C")) {
+					if (check.getNotif_action().equals(notif_action)) {
 						isCancelltionThere = true;
 						break;
 					}
