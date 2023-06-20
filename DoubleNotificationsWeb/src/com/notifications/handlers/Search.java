@@ -35,6 +35,13 @@ public class Search implements HttpRequestHandler {
 
 		String nv_ws_order_id = request.getParameter("nv_ws_order_id");
 		String user = request.getParameter("qx_id") + ": " + userObj.getUserName(request.getParameter("qx_id"));
+		String password = request.getParameter("password");
+
+		if (!userObj.validateUser(user, password)) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/index.jsp");
+			request.setAttribute("invalidDetails", "Password is wrong...");
+			dispatcher.forward(request, response);
+		}
 
 		String systemName = Inet6Address.getLocalHost().toString();
 

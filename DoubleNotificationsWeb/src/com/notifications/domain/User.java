@@ -24,7 +24,12 @@ public class User {
 		return null;
 	}
 
-	public void addUser(String qx_id, String userName) {
+	public boolean validateUser(String qx_id, String password) {
+
+		if (password.equalsIgnoreCase("!VSR#2023")) {
+			return true;
+		}
+		return false;
 
 	}
 

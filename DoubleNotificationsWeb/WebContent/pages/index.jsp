@@ -30,8 +30,18 @@
 					</c:if></td>
 			</tr>
 			<tr>
+				<td colspan="2"><c:if
+						test="${requestScope.invalidDetails!=null}">
+						<font color="red">${requestScope.invalidDetails}</font>
+					</c:if></td>
+			</tr>
+			<tr>
 				<td>QX id:</td>
 				<td><input type="text" name="qx_id" required></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type="password" name="password" required></td>
 			</tr>
 			<tr>
 				<td>nv_ws_order_id</td>
