@@ -15,7 +15,7 @@
 </head>
 <body>
 	<h1>Welcome</h1>
-	<form action="search.do" id="search" method="post">
+	<form action="login.do" id="search" method="post">
 
 		<table>
 			<tr>
@@ -44,12 +44,8 @@
 				<td><input type="password" name="password" required></td>
 			</tr>
 			<tr>
-				<td>nv_ws_order_id</td>
-				<td><input type="text" name="nv_ws_order_id" required></td>
-			</tr>
-			<tr>
 				<td colspan="2" align="center"><input type="submit"
-					value="Search"></td>
+					value="Login"></td>
 			</tr>
 		</table>
 	</form>

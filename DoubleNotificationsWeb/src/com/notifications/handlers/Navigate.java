@@ -20,7 +20,8 @@ import com.notifications.mvc.HttpRequestHandler;
 public class Navigate implements HttpRequestHandler {
 
 	@SuppressWarnings("unchecked")
-	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NumberFormatException, DBFWException {
+	public void handle(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException, NumberFormatException, DBFWException {
 
 		Modify modify = new Modify();
 
@@ -50,7 +51,7 @@ public class Navigate implements HttpRequestHandler {
 			modify.InsertOperation(user, nv_ws_order_id, notif, con, request, response, session, false, true, false);
 			break;
 		case "HOME":
-			RequestDispatcher rd = request.getRequestDispatcher("pages/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("pages/search.jsp");
 			rd.forward(request, response);
 
 		}
