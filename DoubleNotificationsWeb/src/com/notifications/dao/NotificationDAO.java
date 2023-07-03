@@ -14,6 +14,8 @@ import com.notifications.domain.Notification;
 
 /**
  * @author SaiTeja Koppala
+ * 
+ * @category This class is used to fetch or update data to N01 table
  */
 public class NotificationDAO {
 	static Logger log = Logger.getLogger(NotificationDAO.class);
@@ -87,7 +89,7 @@ public class NotificationDAO {
 	}
 
 	public int updateNotifActionByNotif(int nv_ws_order_id, int notif_item_number, String newValue, String column_name,
-			Connection con) throws DBFWException{
+			Connection con) throws DBFWException {
 
 		int corrected = 0;
 
