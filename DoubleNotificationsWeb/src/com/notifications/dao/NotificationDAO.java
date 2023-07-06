@@ -14,6 +14,8 @@ import com.notifications.domain.Notification;
 
 /**
  * @author SaiTeja Koppala
+ * 
+ * @category This class is used to fetch or update data to N01 table
  */
 public class NotificationDAO {
 	static Logger log = Logger.getLogger(NotificationDAO.class);
