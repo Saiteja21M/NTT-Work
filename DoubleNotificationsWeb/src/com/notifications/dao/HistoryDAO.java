@@ -11,7 +11,6 @@ import com.notifications.dbfw.DBFWException;
 import com.notifications.dbfw.DBHelper;
 import com.notifications.dbfw.ParamMapper;
 import com.notifications.domain.HistoryTable;
-import com.notifications.domain.OrderingTable;
 
 public class HistoryDAO {
 
@@ -40,29 +39,4 @@ public class HistoryDAO {
 
 		return historyTableData;
 	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<OrderingTable> getHistoryTableData(Connection con, int nv_ws_order_id) throws DAOAppException {
-
-		List historyTableData = null;
-
-		try {
-			ParamMapper paramMapper = new ParamMapper() {
-
-				@Override
-				public void mapParams(PreparedStatement pStmt) throws SQLException {
-					pStmt.setInt(1, nv_ws_order_id);
-
-				}
-			};
-			historyTableData = DBHelper.executeSelect(con, SqlMapper.GET_HISTORY_TABLE_DATA,
-					SqlMapper.MAP_H01_ORDER_DATA, paramMapper);
-		} catch (DBFWException e) {
-			log.error(e);
-			throw new DAOAppException(e);
-		}
-
-		return historyTableData;
-	}
-
 }

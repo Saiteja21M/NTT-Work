@@ -13,11 +13,11 @@ import com.notifications.domain.OrderingTable;
  */
 public class SqlMapper {
 
-	public static final String FETCH_N01_ORDER = "Select * from toin01 where nv_ws_order_id = ? order by ts_modification, notif_item_number";
+	public static final String FETCH_N01_ORDER = "Select * from toin01 where nv_ws_order_id = ? order by notif_item_number";
 
 	public final static String DELETE_NOTIFICATION_BY_NOTIF = "delete from toin01 where nv_ws_order_id = ? and notif_item_number = ?";
 
-	public final static String UPDATE_NOTIFICAIONS_BY_NOTIF = "update toin01 set notif_item_number = notif_item_number operator ? where "
+	public final static String UPDATE_NOTIFS_BY_NOTIF = "update toin01 set notif_item_number = notif_item_number operator ? where "
 			+ "nv_ws_order_id = ? and notif_item_number > ?";
 
 	public final static String UPDATE_NOTIFICATION_BY_NOTIF = "update toin01 set column = value where nv_ws_order_id = ? and "
@@ -25,10 +25,6 @@ public class SqlMapper {
 
 	public final static String GET_ORDERING_TABLE_DATA = "select nv_ws_order_id,mf_order_no, vehicle_id_7, VEHICLE_STATE,CLIENT,PRODUCT_TYPE,BRAND,"
 			+ "MF_MODEL_CODE,WS_MODEL_CODE from toio01 where nv_ws_order_id = ?";
-
-	public final static String GET_HISTORY_TABLE_DATA = "select nv_ws_order_id, ts_modification, order_type, ivs_order_status, processing_type, "
-			+ "ws_business_type,NV_MF_ORDERER_CA,NV_MF_ORDERER_ID,ORDERER_DOMESTIC,INVOICING_DEALER,MOD_FUNCTION,MOD_SYSTEM,MOD_USER,VERSION,"
-			+ "PARTITION_KEY from toih01 where nv_ws_order_id = ? ";
 
 	public final static String GET_HISTOTY_TABLE_DATA_BY_TS = "select nv_ws_order_id, ts_modification, order_type, ivs_order_status, processing_type, "
 			+ "ws_business_type,NV_MF_ORDERER_CA,NV_MF_ORDERER_ID,ORDERER_DOMESTIC,INVOICING_DEALER,MOD_FUNCTION,MOD_SYSTEM,MOD_USER,VERSION,"

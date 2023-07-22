@@ -79,7 +79,7 @@ public class NotificationDAO {
 				}
 			};
 			corrected = DBHelper.executeUpdate(con,
-					SqlMapper.UPDATE_NOTIFICAIONS_BY_NOTIF.replace("operator", operator), UPDATENOTIFICATION);
+					SqlMapper.UPDATE_NOTIFS_BY_NOTIF.replace("operator", operator), UPDATENOTIFICATION);
 
 		} catch (DBFWException e) {
 			log.error(e);
