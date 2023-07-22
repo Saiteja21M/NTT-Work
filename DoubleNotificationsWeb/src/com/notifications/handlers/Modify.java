@@ -16,10 +16,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.notifications.dao.DAOAppException;
+import com.notifications.dao.DealerDAO;
 import com.notifications.dao.HistoryDAO;
 import com.notifications.dao.NotificationDAO;
 import com.notifications.dao.OrderingDAO;
 import com.notifications.dbfw.DBFWException;
+import com.notifications.domain.DealerTable;
 import com.notifications.domain.HistoryTable;
 import com.notifications.domain.Notification;
 import com.notifications.domain.OrderingTable;
@@ -38,9 +40,11 @@ public class Modify implements HttpRequestHandler {
 
 	public HistoryDAO historyDAO = new HistoryDAO();
 
+	public DealerDAO dealerDAO = new DealerDAO();
+
 	@SuppressWarnings({ "unchecked" })
 	public void handle(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, NumberFormatException, DBFWException {
+			throws ServletException, IOException, NumberFormatException, DBFWException, DAOAppException {
 
 		String action = request.getParameter("action");
 
@@ -285,13 +289,6 @@ public class Modify implements HttpRequestHandler {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			log.error(e);
-		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				log.error(e);
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -322,20 +319,14 @@ public class Modify implements HttpRequestHandler {
 		} catch (SQLException e) {
 			log.error(e);
 			e.printStackTrace();
-		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				log.error(e);
-				e.printStackTrace();
-			}
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	public void InsertOperation(String user, int nv_ws_order_id, List<Notification> notif, Connection con,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			boolean isFindResultOperation, boolean isShowInsertPageOperation, boolean isInsertToN01Operation) {
+			boolean isFindResultOperation, boolean isShowInsertPageOperation, boolean isInsertToN01Operation)
+			throws DAOAppException {
 
 		if (isShowInsertPageOperation) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/insertNotification.jsp");
@@ -374,9 +365,11 @@ public class Modify implements HttpRequestHandler {
 
 				List<OrderingTable> o01Data = (List<OrderingTable>) session.getAttribute("o01Data");
 				List<HistoryTable> h01Data = (List<HistoryTable>) session.getAttribute("h01Data");
+				List<DealerTable> d02data = dealerDAO.getDealerData(con, h01Data.get(0).getNv_mf_orderer_id(),
+						h01Data.get(0).getOrderer_domestic());
 
 				beginInsertToN01Operation(user, nv_ws_order_id, notif, con, request, response, session, o01Data,
-						h01Data, timestamp);
+						h01Data, timestamp, d02data);
 			}
 
 		}
@@ -385,7 +378,8 @@ public class Modify implements HttpRequestHandler {
 	@SuppressWarnings("unchecked")
 	private void beginInsertToN01Operation(String user, int nv_ws_order_id, List<Notification> notif, Connection con,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			List<OrderingTable> orderingTableData, List<HistoryTable> historyTableData, String timestamp) {
+			List<OrderingTable> orderingTableData, List<HistoryTable> historyTableData, String timestamp,
+			List<DealerTable> d02data) {
 
 		int h01RowPosition = Integer.parseInt((String) request.getParameter("h01Row"));
 		int notifPosition = Integer.parseInt((String) request.getParameter("notifPosition"));
@@ -424,7 +418,7 @@ public class Modify implements HttpRequestHandler {
 		n01Data.setMod_user(h01Data.getMod_user());
 		n01Data.setVersion(h01Data.getVersion());
 		n01Data.setPartition_key(h01Data.getPartition_key());
-		n01Data.setDealer_class("EH");
+		n01Data.setDealer_class(d02data.get(0).getDealerClass());
 
 		int updated = notificationDAO.correctNotifications(con, nv_ws_order_id, notifPosition, 1, "+");
 

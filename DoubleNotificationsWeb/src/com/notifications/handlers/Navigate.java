@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.notifications.dao.DAOAppException;
 import com.notifications.dbfw.DBFWException;
 import com.notifications.domain.Notification;
 import com.notifications.mvc.HttpRequestHandler;
@@ -21,7 +22,7 @@ public class Navigate implements HttpRequestHandler {
 
 	@SuppressWarnings("unchecked")
 	public void handle(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, NumberFormatException, DBFWException {
+			throws ServletException, IOException, NumberFormatException, DBFWException, DAOAppException {
 
 		Modify modify = new Modify();
 

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.notifications.dbfw.ResultMapper;
+import com.notifications.domain.DealerTable;
 import com.notifications.domain.HistoryTable;
 import com.notifications.domain.Notification;
 import com.notifications.domain.OrderingTable;
@@ -14,6 +15,8 @@ import com.notifications.domain.OrderingTable;
 public class SqlMapper {
 
 	public static final String FETCH_N01_ORDER = "Select * from toin01 where nv_ws_order_id = ? order by notif_item_number";
+
+	public static final String GET_DEALER_DATA = "Select * from toid02 where nv_mf_orderer_id = ? and orderer_domestic = ?";
 
 	public final static String DELETE_NOTIFICATION_BY_NOTIF = "delete from toin01 where nv_ws_order_id = ? and notif_item_number = ?";
 
@@ -119,6 +122,23 @@ public class SqlMapper {
 			h01Data.setPartition_key(rs.getString("partition_key"));
 
 			return h01Data;
+
+		}
+	};
+
+	public static final ResultMapper MAP_D02_DEALER_DATA = new ResultMapper() {
+
+		@Override
+		public Object mapRows(ResultSet rs) throws SQLException {
+
+			DealerTable d02Data = new DealerTable();
+
+			d02Data.setNv_mf_orderer_id(rs.getString("nv_mf_orderer_id"));
+			d02Data.setNv_ws_orderer_id(rs.getString("nv_ws_orderer_id"));
+			d02Data.setOrderer_domestic(rs.getString("orderer_domestic"));
+			d02Data.setDealerClass(rs.getString("dealer_class"));
+
+			return d02Data;
 
 		}
 	};

@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.notifications.dao.DAOAppException;
 import com.notifications.dbfw.DBFWException;
 
 @SuppressWarnings("serial")
@@ -37,6 +38,9 @@ public class MvcController extends javax.servlet.http.HttpServlet implements jav
 			try {
 				handler.handle(request, response);
 			} catch (NumberFormatException | DBFWException e) {
+				e.printStackTrace();
+			} catch (DAOAppException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
