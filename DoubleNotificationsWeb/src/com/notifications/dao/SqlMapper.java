@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.notifications.dbfw.ResultMapper;
+import com.notifications.domain.CounterTable;
 import com.notifications.domain.DealerTable;
 import com.notifications.domain.HistoryTable;
 import com.notifications.domain.Notification;
@@ -13,6 +14,7 @@ import com.notifications.domain.OrderingTable;
  * @author SaiTeja Koppala
  */
 public class SqlMapper {
+	public static final String GET_ALL_REVOKED_ORDERS = "Select * from toic05";
 
 	public static final String FETCH_N01_ORDER = "Select * from toin01 where nv_ws_order_id = ? order by notif_item_number";
 
@@ -140,6 +142,17 @@ public class SqlMapper {
 
 			return d02Data;
 
+		}
+	};
+
+	public static final ResultMapper MAP_C05_DATA = new ResultMapper() {
+
+		@Override
+		public Object mapRows(ResultSet rs) throws SQLException {
+			CounterTable c05Data = new CounterTable();
+
+			c05Data.setNv_ws_order_id(rs.getString("nv_w_order_id"));
+			return c05Data;
 		}
 	};
 

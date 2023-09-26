@@ -48,14 +48,21 @@ public class Search implements HttpRequestHandler {
 		List nv_ws_order_idResultList = null;
 		NotificationDAO dao = new NotificationDAO();
 		try {
+
 			nv_ws_order_idResultList = dao.getNotificationsByNvWsOrderId(con, Integer.parseInt(nv_ws_order_id));
 			if (!nv_ws_order_idResultList.isEmpty()) {
 
-				sessionObj.setAttribute("nv_ws_order_idResultList", nv_ws_order_idResultList);
+				if (!dao.checkIfOrderIsRevoked(nv_ws_order_id, con)) {
+					sessionObj.setAttribute("nv_ws_order_idResultList", nv_ws_order_idResultList);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("pages/results.jsp");
+					dispatcher.forward(request, response);
 
-				RequestDispatcher dispatcher = request.getRequestDispatcher("pages/results.jsp");
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("pages/search.jsp");
+					sessionObj.setAttribute("Err", "Order is not Revoked");
+					dispatcher.forward(request, response);
 
-				dispatcher.forward(request, response);
+				}
 
 			} else {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("pages/search.jsp");
@@ -67,6 +74,12 @@ public class Search implements HttpRequestHandler {
 			log.error(e);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("error.jsp");
 			request.setAttribute("Err", e.getMessage());
+			dispatcher.forward(request, response);
+
+		} catch (NumberFormatException e1) {
+			log.error(e1);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/search.jsp");
+			request.setAttribute("Err", "Alpha Numeric is not allowed");
 			dispatcher.forward(request, response);
 
 		}
