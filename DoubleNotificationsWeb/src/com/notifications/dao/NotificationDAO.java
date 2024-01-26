@@ -180,11 +180,11 @@ public class NotificationDAO {
 
 		boolean isRevoked = false;
 
-		List<String> revokedOrderList = getAllRevokedOrders(con);
-
-		if (revokedOrderList.contains(nv_ws_order_id)) {
-			isRevoked = true;
-		}
+		// List<String> revokedOrderList = getAllRevokedOrders(con);
+		//
+		// if (revokedOrderList.contains(nv_ws_order_id)) {
+		// isRevoked = true;
+		// }
 
 		return isRevoked;
 	}

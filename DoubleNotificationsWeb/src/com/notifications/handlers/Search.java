@@ -24,7 +24,7 @@ public class Search implements HttpRequestHandler {
 
 	public static Logger log = Logger.getLogger(Search.class);
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unused" })
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(false);
@@ -44,6 +44,7 @@ public class Search implements HttpRequestHandler {
 		build.append("from system: " + systemName + " ");
 
 		log.info(build);
+		boolean isdebugEnabled = log.isDebugEnabled() ? true : false;
 
 		List nv_ws_order_idResultList = null;
 		NotificationDAO dao = new NotificationDAO();

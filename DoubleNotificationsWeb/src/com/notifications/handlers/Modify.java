@@ -365,8 +365,10 @@ public class Modify implements HttpRequestHandler {
 
 				List<OrderingTable> o01Data = (List<OrderingTable>) session.getAttribute("o01Data");
 				List<HistoryTable> h01Data = (List<HistoryTable>) session.getAttribute("h01Data");
-				List<DealerTable> d02data = dealerDAO.getDealerData(con, h01Data.get(0).getNv_mf_orderer_id(),
-						h01Data.get(0).getOrderer_domestic());
+				List<String> d02data = new ArrayList<>();
+				d02data.add("EH");
+				// dealerDAO.getDealerData(con,
+				// h01Data.get(0).getNv_mf_orderer_id(),h01Data.get(0).getOrderer_domestic());
 
 				beginInsertToN01Operation(user, nv_ws_order_id, notif, con, request, response, session, o01Data,
 						h01Data, timestamp, d02data);
@@ -379,7 +381,7 @@ public class Modify implements HttpRequestHandler {
 	private void beginInsertToN01Operation(String user, int nv_ws_order_id, List<Notification> notif, Connection con,
 			HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			List<OrderingTable> orderingTableData, List<HistoryTable> historyTableData, String timestamp,
-			List<DealerTable> d02data) {
+			List<String> d02data) {
 
 		int h01RowPosition = Integer.parseInt((String) request.getParameter("h01Row"));
 		int notifPosition = Integer.parseInt((String) request.getParameter("notifPosition"));
@@ -418,7 +420,7 @@ public class Modify implements HttpRequestHandler {
 		n01Data.setMod_user(h01Data.getMod_user());
 		n01Data.setVersion(h01Data.getVersion());
 		n01Data.setPartition_key(h01Data.getPartition_key());
-		n01Data.setDealer_class(d02data.get(0).getDealerClass());
+		n01Data.setDealer_class(d02data.get(0));
 
 		int updated = notificationDAO.correctNotifications(con, nv_ws_order_id, notifPosition, 1, "+");
 

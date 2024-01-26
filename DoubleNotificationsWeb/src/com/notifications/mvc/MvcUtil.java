@@ -65,7 +65,8 @@ public abstract class MvcUtil implements HttpRequestHandler {
 			throw new MvcException(e);
 		} finally {
 			try {
-				proStream.close();
+				if (proStream != null)
+					proStream.close();
 			} catch (IOException e) {
 				throw new MvcException(e);
 			}
