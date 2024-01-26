@@ -3,6 +3,7 @@ package com.notifications.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -78,8 +79,8 @@ public class NotificationDAO {
 					preStmt.setInt(3, notif_item_number - 1);
 				}
 			};
-			corrected = DBHelper.executeUpdate(con,
-					SqlMapper.UPDATE_NOTIFICAIONS_BY_NOTIF.replace("operator", operator), UPDATENOTIFICATION);
+			corrected = DBHelper.executeUpdate(con, SqlMapper.UPDATE_NOTIFS_BY_NOTIF.replace("operator", operator),
+					UPDATENOTIFICATION);
 
 		} catch (DBFWException e) {
 			log.error(e);
@@ -173,6 +174,34 @@ public class NotificationDAO {
 
 		return inserted;
 
+	}
+
+	public boolean checkIfOrderIsRevoked(String nv_ws_order_id, Connection con) {
+
+		boolean isRevoked = false;
+
+		// List<String> revokedOrderList = getAllRevokedOrders(con);
+		//
+		// if (revokedOrderList.contains(nv_ws_order_id)) {
+		// isRevoked = true;
+		// }
+
+		return isRevoked;
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<String> getAllRevokedOrders(Connection con) {
+		List<String> revokedOrderList = new ArrayList<>();
+
+		try {
+			revokedOrderList = DBHelper.executeSelect(con, SqlMapper.GET_ALL_REVOKED_ORDERS, SqlMapper.MAP_C05_DATA);
+
+		} catch (DBFWException e) {
+			log.error(e);
+			e.printStackTrace();
+		}
+
+		return revokedOrderList;
 	}
 
 }

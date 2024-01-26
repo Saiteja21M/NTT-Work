@@ -24,6 +24,11 @@
 					</c:if></td>
 			</tr>
 			<tr>
+				<td colspan="2"><c:if test="${requestScope.numExc!=null}">
+						<font color="red">${requestScope.numExc}</font>
+					</c:if></td>
+			</tr>
+			<tr>
 				<td>nv_ws_order_id</td>
 				<td><input type="text" name="nv_ws_order_id" required></td>
 			</tr>

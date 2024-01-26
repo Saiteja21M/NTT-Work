@@ -10,33 +10,36 @@ import org.apache.log4j.Logger;
 import com.notifications.dbfw.DBFWException;
 import com.notifications.dbfw.DBHelper;
 import com.notifications.dbfw.ParamMapper;
-import com.notifications.domain.HistoryTable;
+import com.notifications.domain.DealerTable;
 
-public class HistoryDAO {
+public class DealerDAO {
 
 	static Logger log = Logger.getLogger(HistoryDAO.class);
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public List<HistoryTable> getHistoryTableDataByTimestamp(Connection con, int nv_ws_order_id, String timestamp)
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List<DealerTable> getDealerData(Connection con, String nv_mf_orderer_id, String orderer_domestic)
 			throws DAOAppException {
-		List historyTableData = null;
+
+		List dealerData = null;
 
 		try {
 			ParamMapper paramMapper = new ParamMapper() {
 
 				@Override
 				public void mapParams(PreparedStatement pStmt) throws SQLException {
-					pStmt.setInt(1, nv_ws_order_id);
-					pStmt.setString(2, timestamp);
+					pStmt.setString(1, nv_mf_orderer_id);
+					pStmt.setString(2, orderer_domestic);
 				}
 			};
-			historyTableData = DBHelper.executeSelect(con, SqlMapper.GET_HISTOTY_TABLE_DATA_BY_TS,
-					SqlMapper.MAP_H01_ORDER_DATA, paramMapper);
+			dealerData = DBHelper.executeSelect(con, SqlMapper.GET_DEALER_DATA, SqlMapper.MAP_D02_DEALER_DATA,
+					paramMapper);
 		} catch (DBFWException e) {
 			log.error(e);
 			throw new DAOAppException(e);
 		}
 
-		return historyTableData;
+		return dealerData;
+
 	}
+
 }
