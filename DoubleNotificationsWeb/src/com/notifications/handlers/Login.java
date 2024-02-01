@@ -48,24 +48,28 @@ public class Login implements HttpRequestHandler {
 		build.append("from system: " + systemName + " ");
 
 		log.info(build);
+	}
+
+	public static void initConnection(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		ConnectionHolder ch = null;
 		Connection con = null;
+		HttpSession sessionObj = request.getSession();
 
 		try {
 			ch = ConnectionHolder.getInstance();
 			con = ch.getConnection();
 			if (con != null) {
 				con.setAutoCommit(false);
+			} else {
+				throw new NullPointerException();
 			}
 			sessionObj.setAttribute("connection", con);
 		} catch (DBConnectionException | SQLException | NullPointerException e1) {
 			try {
 				con.close();
 			} catch (SQLException | NullPointerException e) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("pages/index.jsp");
-				request.setAttribute("databaseConnection", "Database Connection can't be established...");
-				dispatcher.forward(request, response);
 				log.error(e);
 				e.printStackTrace();
 			}

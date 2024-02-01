@@ -27,6 +27,8 @@ public class Search implements HttpRequestHandler {
 	@SuppressWarnings({ "rawtypes", "unused" })
 	public void handle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		Login.initConnection(request, response);
+
 		HttpSession session = request.getSession(false);
 		String user = (String) session.getAttribute("user");
 		Connection con = (Connection) session.getAttribute("connection");
@@ -49,6 +51,9 @@ public class Search implements HttpRequestHandler {
 		List nv_ws_order_idResultList = null;
 		NotificationDAO dao = new NotificationDAO();
 		try {
+			if (con == null) {
+				throw new NullPointerException("DB Connection is not established");
+			}
 
 			nv_ws_order_idResultList = dao.getNotificationsByNvWsOrderId(con, Integer.parseInt(nv_ws_order_id));
 			if (!nv_ws_order_idResultList.isEmpty()) {
@@ -83,6 +88,12 @@ public class Search implements HttpRequestHandler {
 			request.setAttribute("Err", "Alpha Numeric is not allowed");
 			dispatcher.forward(request, response);
 
+		} catch (NullPointerException e) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("pages/search.jsp");
+			request.setAttribute("databaseConnection", "Database Connection can't be established...");
+			dispatcher.forward(request, response);
+			log.error(e);
+			e.printStackTrace();
 		}
 	}
 }

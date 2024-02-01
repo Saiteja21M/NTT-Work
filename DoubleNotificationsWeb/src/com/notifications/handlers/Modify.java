@@ -21,7 +21,6 @@ import com.notifications.dao.HistoryDAO;
 import com.notifications.dao.NotificationDAO;
 import com.notifications.dao.OrderingDAO;
 import com.notifications.dbfw.DBFWException;
-import com.notifications.domain.DealerTable;
 import com.notifications.domain.HistoryTable;
 import com.notifications.domain.Notification;
 import com.notifications.domain.OrderingTable;
