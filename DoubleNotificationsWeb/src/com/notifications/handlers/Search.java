@@ -1,7 +1,6 @@
 package com.notifications.handlers;
 
 import java.io.IOException;
-import java.net.Inet6Address;
 import java.sql.Connection;
 import java.util.List;
 
@@ -35,15 +34,12 @@ public class Search implements HttpRequestHandler {
 
 		String nv_ws_order_id = request.getParameter("nv_ws_order_id");
 
-		String systemName = Inet6Address.getLocalHost().toString();
-
 		HttpSession sessionObj = request.getSession();
 		sessionObj.setAttribute("nv_ws_order_id", nv_ws_order_id);
 		StringBuilder build = new StringBuilder();
 
 		build.append("Session started by user: " + user + " ");
 		build.append("order: " + nv_ws_order_id + " ");
-		build.append("from system: " + systemName + " ");
 
 		log.info(build);
 		boolean isdebugEnabled = log.isDebugEnabled() ? true : false;
